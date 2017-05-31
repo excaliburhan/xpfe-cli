@@ -1,0 +1,9 @@
+{
+  "name": "xpfe-cli",
+  "version": "1.0.0",
+  "description": "A simple cli for front-end projects.",
+  "main": "index.js",
+  "repository": "git@github.com:excaliburhan/xpfe-cli.git",
+  "author": "xiaoping <edwardhjp@gmail.com>",
+  "license": "MIT"
+}
