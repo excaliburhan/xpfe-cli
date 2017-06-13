@@ -7,6 +7,9 @@ var download = require('download-git-repo')
 var chalk = require('chalk')
 var ora = require('ora')
 var exists = require('fs').existsSync
+var exec = require('child_process').exec
+var rm = require('rimraf').sync
+var tplJSON = require('../template')
 
 // help
 function help () {
@@ -17,22 +20,63 @@ function help () {
 // run process
 function run () {
   if (!hasSlash) {
-    var officialTemplate = 'xpfe-templates/' + templateName
-    downloadTpl(officialTemplate)
+    var downloadTemplate = 'xpfe-templates/' + templateName
+    var url = tplJSON[templateName]
+    if (url) { // custom
+      if (url.indexOf('gitlab') > -1) { // just clone
+        cloneTpl(url)
+      } else {
+        downloadTemplate = getRepoUrl(url)
+        downloadTpl(downloadTemplate)
+      }
+    } else {
+      downloadTpl(downloadTemplate)
+    }
   } else {
     downloadTpl(templateName)
   }
 }
 
+// get github/gitlab repo url
+function getRepoUrl(url) {
+  var ret = url
+  var index
+  if (url.indexOf('github.com') > -1) {
+    index = url.indexOf('github.com')
+    ret = url.substring(index + 11, url.length - 4)
+  }
+  return ret
+}
+
 // download template
 function downloadTpl(template) {
-  var spinner = ora('downloading template')
+  var spinner = ora('Downloading template...')
   spinner.start()
   download(template, relativePath, function (err) {
     spinner.stop()
-    if (err) console.log(chalk.red(err))
     console.log()
-    console.log(chalk.cyan('Create project success!'))
+    if (err) {
+      console.log(chalk.red(err))
+      process.exit()
+    }
+    console.log(chalk.green('Create project success!'))
+    process.exit()
+  })
+}
+
+// git clone template
+function cloneTpl(repoUrl) {
+  var execCmd = 'git clone ' + repoUrl + ' ' + relativePath
+  var spinner = ora('Downloading template...')
+  spinner.start()
+  exec(execCmd, (err, stdout, stderr) => {
+    spinner.stop()
+    console.log()
+    if (err) {
+      console.log(chalk.red(err))
+      process.exit()
+    }
+    console.log(chalk.green('Create project success!'))
     process.exit()
   })
 }
@@ -76,7 +120,12 @@ if (exists(filePath)) {
         : 'Target directory exists. Continue?'
     }
   ]).then(function (ans) {
-    if (ans.ok) run()
+    if (ans.ok) {
+      if (!isCurrent) {
+        rm(filePath)
+      }
+      run()
+    }
   })
 } else {
   run()

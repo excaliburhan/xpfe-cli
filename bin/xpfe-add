@@ -11,8 +11,12 @@ function updateTpl(obj, overwrite) {
   var act = overwrite ? 'updated.' : 'added.'
   tplJSON[obj.name] = obj.url
   fs.writeFile(tplPath, JSON.stringify(tplJSON), function (err) {
-    if (err) console.log(chalk.red(err))
-    console.log(chalk.cyan('Template `'+ obj.name +'` ' + act))
+    console.log()
+    if (err) {
+      console.log(chalk.red(err))
+      process.exit()
+    }
+    console.log(chalk.green('Template `'+ obj.name +'` ' + act))
     process.exit()
   })
 }
@@ -35,6 +39,7 @@ inquirer.prompt([
   }
 ]).then(function (ans) {
   if (!ans.name || !ans.url) {
+    console.log()
     console.log(chalk.red('Please input template name or git url!'))
     process.exit()
   }

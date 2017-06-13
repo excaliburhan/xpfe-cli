@@ -17,11 +17,16 @@ function deleteTpl(name) {
   if (tplJSON[name]) {
     delete tplJSON[name]
     fs.writeFile(tplPath, JSON.stringify(tplJSON), function (err) {
-      if (err) console.log(chalk.red(err))
-      console.log(chalk.cyan('Template `'+ name +'` deleted.'))
+      console.log()
+      if (err) {
+        console.log(chalk.red(err))
+        process.exit()
+      }
+      console.log(chalk.green('Template `'+ name +'` deleted.'))
       process.exit()
     })
   } else {
+    console.log()
     console.log(chalk.red('No such template!'))
   }
 }
