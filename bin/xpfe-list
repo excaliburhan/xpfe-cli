@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
+var path = require('path')
 var request = require('request')
 var chalk = require('chalk')
-var tplJSON = require('../template')
+var file = require('../lib/file')
+var tplJSON = require(file.filePath())
 
 process.on('exit', function () {
   console.log()

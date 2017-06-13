@@ -4,7 +4,8 @@ var fs = require('fs')
 var path = require('path')
 var program = require('commander')
 var chalk = require('chalk')
-var tplJSON = require('../template')
+var file = require('../lib/file')
+var tplJSON = require(file.filePath())
 
 // help
 function help () {
@@ -13,18 +14,10 @@ function help () {
 }
 
 function deleteTpl(name) {
-  var tplPath = path.resolve(__dirname, '../template.json')
   if (tplJSON[name]) {
+    var str = 'Template `'+ name +'` deleted.'
     delete tplJSON[name]
-    fs.writeFile(tplPath, JSON.stringify(tplJSON), function (err) {
-      console.log()
-      if (err) {
-        console.log(chalk.red(err))
-        process.exit()
-      }
-      console.log(chalk.green('Template `'+ name +'` deleted.'))
-      process.exit()
-    })
+    file.updateFile(JSON.stringify(tplJSON), str)
   } else {
     console.log()
     console.log(chalk.red('No such template!'))

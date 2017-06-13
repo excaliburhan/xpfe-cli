@@ -9,7 +9,8 @@ var ora = require('ora')
 var exists = require('fs').existsSync
 var exec = require('child_process').exec
 var rm = require('rimraf').sync
-var tplJSON = require('../template')
+var file = require('../lib/file')
+var tplJSON = require(file.filePath())
 
 // help
 function help () {
