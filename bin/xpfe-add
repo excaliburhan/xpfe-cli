@@ -4,21 +4,14 @@ var fs = require('fs')
 var path = require('path')
 var inquirer = require('inquirer')
 var chalk = require('chalk')
-var tplJSON = require('../template')
+var file = require('../lib/file')
+var tplJSON = require(file.filePath())
 
 function updateTpl(obj, overwrite) {
-  var tplPath = path.resolve(__dirname, '../template.json')
   var act = overwrite ? 'updated.' : 'added.'
+  var str = 'Template `'+ obj.name +'` ' + act
   tplJSON[obj.name] = obj.url
-  fs.writeFile(tplPath, JSON.stringify(tplJSON), function (err) {
-    console.log()
-    if (err) {
-      console.log(chalk.red(err))
-      process.exit()
-    }
-    console.log(chalk.green('Template `'+ obj.name +'` ' + act))
-    process.exit()
-  })
+  file.updateFile(JSON.stringify(tplJSON), str)
 }
 
 console.log()

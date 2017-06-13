@@ -1,6 +1,6 @@
 {
   "name": "xpfe-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple cli for front-end projects.",
   "main": "index.js",
   "repository": "git@github.com:excaliburhan/xpfe-cli.git",
@@ -20,6 +20,7 @@
     "inquirer": "^3.1.0",
     "ora": "^1.2.0",
     "request": "^2.81.0",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "user-home": "^2.0.0"
   }
 }
