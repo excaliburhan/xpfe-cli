@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+
+var fs = require('fs')
+var path = require('path')
+var program = require('commander')
+var chalk = require('chalk')
+var tplJSON = require('../template')
+
+// help
+function help () {
+  program.parse(process.argv)
+  if (program.args.length < 1) return program.help()
+}
+
+function deleteTpl(name) {
+  var tplPath = path.resolve(__dirname, '../template.json')
+  if (tplJSON[name]) {
+    delete tplJSON[name]
+    fs.writeFile(tplPath, JSON.stringify(tplJSON), function (err) {
+      if (err) console.log(chalk.red(err))
+      console.log(chalk.cyan('Template `'+ name +'` deleted.'))
+      process.exit()
+    })
+  } else {
+    console.log(chalk.red('No such template!'))
+  }
+}
+
+program
+  .usage('<template-name>')
+  .on('--help', function () {
+    console.log('  Examples:')
+    console.log()
+    console.log(chalk.gray('    # Delete a certain template'))
+    console.log('    $ xpfe del test')
+    console.log()
+  })
+
+help()
+
+// get params
+var templateName = program.args[0]
+
+console.log()
+process.on('exit', function () {
+  console.log()
+})
+
+if (templateName) {
+  deleteTpl(templateName)
+}

@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+var pkgJSON = require('../package')
+
+program
+  .version(pkgJSON.version)
+  .usage('<command> [options]')
+  .command('init', 'Generate a new project')
+  .command('ls', 'List all templates')
+  .command('add', 'Add a local template')
+  .command('del', 'Delete a local template')
+  .parse(process.argv)

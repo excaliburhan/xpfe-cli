@@ -1,0 +1,55 @@
+#!/usr/bin/env node
+
+var fs = require('fs')
+var path = require('path')
+var inquirer = require('inquirer')
+var chalk = require('chalk')
+var tplJSON = require('../template')
+
+function updateTpl(obj, overwrite) {
+  var tplPath = path.resolve(__dirname, '../template.json')
+  var act = overwrite ? 'updated.' : 'added.'
+  tplJSON[obj.name] = obj.url
+  fs.writeFile(tplPath, JSON.stringify(tplJSON), function (err) {
+    if (err) console.log(chalk.red(err))
+    console.log(chalk.cyan('Template `'+ obj.name +'` ' + act))
+    process.exit()
+  })
+}
+
+console.log()
+process.on('exit', function () {
+  console.log()
+})
+
+inquirer.prompt([
+  {
+    name: 'name',
+    type: 'input',
+    message: 'What is the template name?'
+  },
+  {
+    name: 'url',
+    type: 'input',
+    message: 'What is the template git url?'
+  }
+]).then(function (ans) {
+  if (!ans.name || !ans.url) {
+    console.log(chalk.red('Please input template name or git url!'))
+    process.exit()
+  }
+  if (tplJSON[ans.name]) {
+    inquirer.prompt([
+      {
+        name: 'overwrite',
+        type: 'confirm',
+        message: 'Template `' + ans.name + '` already exists, overwrite?'
+      }
+    ]).then(function (ans2) {
+      if (ans2.overwrite) updateTpl(ans, true)
+    })
+  } else {
+    updateTpl(ans)
+  }
+})
+

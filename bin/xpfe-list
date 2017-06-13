@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+
+var request = require('request')
+var chalk = require('chalk')
+var tplJSON = require('../template')
+
+process.on('exit', function () {
+  console.log()
+})
+
+// List repos
+if (Object.keys(tplJSON).length) {
+  console.log()
+  console.log('  Custom templates:')
+  console.log()
+}
+for (var key in tplJSON) {
+  if (tplJSON.hasOwnProperty(key)) {
+    var url = tplJSON[key]
+    console.log(
+      '  ' + chalk.green('▪︎') +
+      '  ' + chalk.cyan(key) +
+      ' - ' + url
+    )
+  }
+}
+
+console.log()
+request({
+  url: 'https://api.github.com/users/xpfe-templates/repos',
+  headers: {
+    'User-Agent': 'xpfe-cli'
+  }
+}, function (err, res, body) {
+  if (err) console.error(err)
+  var requestBody = JSON.parse(body)
+  if (Array.isArray(requestBody)) {
+    console.log()
+    console.log('  Official templates:')
+    console.log()
+    requestBody.forEach(function (repo) {
+      console.log(
+        '  ' + chalk.yellow('★') +
+        '  ' + chalk.cyan(repo.name) +
+        ' - ' + repo.description
+      )
+    })
+  } else {
+    console.error(requestBody.message)
+  }
+})
