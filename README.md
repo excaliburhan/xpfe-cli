@@ -9,10 +9,24 @@ A simple cli for front-end projects.
 
 ### list
 
-list all custom and official templates.
+List all custom and official templates.
 
 > xpfe ls
 
 ### init
 
-Create a project form a template
+Create a project form a template.
+
+> xpfe <template-name> [project-name]
+
+### add
+
+Add a custom template.
+
+> xpfe add
+
+### del
+
+Delete a custom template.
+
+> xpfe del <template-name>
