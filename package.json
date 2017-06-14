@@ -1,6 +1,6 @@
 {
   "name": "xpfe-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A simple cli for front-end projects.",
   "main": "index.js",
   "repository": "git@github.com:excaliburhan/xpfe-cli.git",
