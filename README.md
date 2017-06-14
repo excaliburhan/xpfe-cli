@@ -17,7 +17,7 @@ List all custom and official templates.
 
 Create a project form a template.
 
-> xpfe <template-name> [project-name]
+> xpfe init \<template-name\> [project-name]
 
 ### add
 
@@ -29,4 +29,4 @@ Add a custom template.
 
 Delete a custom template.
 
-> xpfe del <template-name>
+> xpfe del \<template-name\>
