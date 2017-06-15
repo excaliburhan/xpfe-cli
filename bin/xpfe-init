@@ -77,6 +77,7 @@ function cloneTpl(repoUrl) {
       console.log(chalk.red(err))
       process.exit()
     }
+    rm(relativePath + '.git') // 删除.git文件
     console.log(chalk.green('Create project success!'))
     process.exit()
   })

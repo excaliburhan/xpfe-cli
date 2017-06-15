@@ -1,6 +1,10 @@
 # xpfe-cli
 A simple cli for front-end projects.
 
+## Language
+
+- [中文](https://github.com/excaliburhan/xpfe-cli/blob/master/docs/zh_CN.md)
+
 ## Installation
 
 > npm install -g xpfe-cli
