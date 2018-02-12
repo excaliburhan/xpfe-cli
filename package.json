@@ -1,26 +1,31 @@
 {
   "name": "xpfe-cli",
-  "version": "1.0.5",
-  "description": "A simple cli for front-end projects.",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "🚀 CLI for fast front-end development",
+  "bin": {
+    "xpfe": "bin/xpfe.js"
+  },
   "repository": "git@github.com:excaliburhan/xpfe-cli.git",
   "author": "xiaoping <edwardhjp@gmail.com>",
   "license": "MIT",
-  "bin": {
-    "xpfe": "bin/xpfe",
-    "xpfe-init": "bin/xpfe-init",
-    "xpfe-ls": "bin/xpfe-list",
-    "xpfe-add": "bin/xpfe-add",
-    "xpfe-del": "bin/xpfe-delete"
-  },
   "dependencies": {
-    "chalk": "^1.1.3",
-    "commander": "^2.9.0",
-    "download-git-repo": "^1.0.1",
-    "inquirer": "^3.1.0",
-    "ora": "^1.2.0",
-    "request": "^2.81.0",
-    "rimraf": "^2.6.1",
+    "axios": "^0.17.1",
+    "chalk": "^2.3.1",
+    "cli-table": "^0.3.1",
+    "commander": "^2.14.1",
+    "download-git-repo": "^1.0.2",
+    "execa": "^0.9.0",
+    "inquirer": "^5.1.0",
+    "latest-version": "^3.1.0",
+    "lodash.clonedeep": "^4.5.0",
+    "ora": "^1.4.0",
+    "readline": "^1.3.0",
+    "rimraf": "^2.6.2",
+    "semver": "^5.5.0",
+    "string.prototype.padstart": "^3.0.0",
     "user-home": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=8"
   }
 }
