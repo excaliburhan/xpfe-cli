@@ -1,2 +1,31 @@
 # xpfe-cli
 🚀 CLI for fast front-end development
+
+## Language
+
+[中文](https://github.com/excaliburhan/xpfe-cli/blob/master/docs/zh_CN.md)
+
+![](http://static.excaliburhan.com/demo/xpfe-cli.gif)
+
+## Installation
+
+> npm install -g xpfe-cli
+
+## Usage
+
+### init
+
+create a project named `app-name`
+
+> xpfe init \<app-name\>
+
+### config
+
+edit global xpfe-cli settings
+
+> xpfe config
+### list
+
+list all supported templates
+
+> xpfe ls

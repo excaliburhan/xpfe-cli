@@ -1,5 +1,7 @@
 # xpfe-cli
-前端项目脚手架工具.
+🚀 前端快速开发脚手架工具
+
+![](http://static.excaliburhan.com/demo/xpfe-cli.gif)
 
 ## 安装
 
@@ -7,26 +9,19 @@
 
 ## 使用
 
-### list
-
-列出所有自定义和官方的模版.
-
-> xpfe ls
-
 ### init
 
-从模版创建一个项目
+创建一个名为`app-name`的项目
 
 > xpfe init \<template-name\> [project-name]
 
-### add
+### config
 
-添加自定义的模版.
+编辑`xpfe-cli`的全局设置项
 
-> xpfe add
+> xpfe config
+### list
 
-### del
+列出目前支持的模版
 
-删除自定义模版.
-
-> xpfe del \<template-name\>
+> xpfe ls
