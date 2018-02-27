@@ -5,7 +5,6 @@ require('../lib/utils/enhanceCommander')
 const semver = require('semver')
 const program = require('commander')
 const chalk = require('chalk')
-const showConsole = require('../lib/utils/console')
 const requireVerison = require('../package.json').engines.node
 
 // filter commander options.
@@ -46,37 +45,33 @@ program
   .command('config')
   .description('🛠  global config for xpfe-cli')
   .option(
-    '-m, --packageManager <command>',
-    'Use yarn/npm to install dependencies'
+    '-f, --filters <ruleName>',
+    'Add filter rules for replace files'
   )
-  .option(
-    '-r, --registry <url>',
-    'Use specified npm registry to install dependencies (only for npm)'
-  )
-  .action((name, cmd) => {
-    require('../lib/commands/config')(name, cleanArgs(cmd))
+  .action((cmd) => {
+    require('../lib/commands/config')(filterArgs(cmd))
   })
 
 program
   .command('ls')
   .description('📗  list all templates (force fresh cached templates)')
-  .action((name, cmd) => {
-    require('../lib/commands/list')(name, cleanArgs(cmd))
+  .action((cmd) => {
+    require('../lib/commands/list')(filterArgs(cmd))
   })
 
-program
-  .command('add <template-name>')
-  .description('📌  add custom template')
-  .action((name, cmd) => {
-    require('../lib/commands/add')(name, cleanArgs(cmd))
-  })
+// program
+//   .command('add <template-name>')
+//   .description('📌  add custom template')
+//   .action((name, cmd) => {
+//     require('../lib/commands/add')(name, filterArgs(cmd))
+//   })
 
-program
-  .command('del <template-name>')
-  .description('✂️  delete custom template')
-  .action((name, cmd) => {
-    require('../lib/commands/del')(name, cleanArgs(cmd))
-  })
+// program
+//   .command('del <template-name>')
+//   .description('✂️  delete custom template')
+//   .action((name, cmd) => {
+//     require('../lib/commands/del')(name, filterArgs(cmd))
+//   })
 
 program.on('--help', () => {
   console.log()
