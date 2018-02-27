@@ -1,6 +1,6 @@
 {
   "name": "xpfe-cli",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "🚀 CLI for fast front-end development",
   "bin": {
     "xpfe": "bin/xpfe.js"
