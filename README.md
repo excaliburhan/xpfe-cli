@@ -1,11 +1,11 @@
 # xpfe-cli
 🚀 CLI for fast front-end development
 
+![](http://static.excaliburhan.com/demo/xpfe-cli.gif)
+
 ## Language
 
 [中文](https://github.com/excaliburhan/xpfe-cli/blob/master/docs/zh_CN.md)
-
-![](http://static.excaliburhan.com/demo/xpfe-cli.gif)
 
 ## Installation
 
